@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        "ms-python.vscode-python-envs",
+        "streetsidesoftware.code-spell-checker",
+        "platformio.platformio-ide"
+    ]
+}
