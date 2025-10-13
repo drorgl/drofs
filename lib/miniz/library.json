@@ -1,0 +1,17 @@
+{
+    "$schema": "https://raw.githubusercontent.com/platformio/platformio-core/develop/platformio/assets/schema/library.json",
+    "name": "miniz",
+    "version": "3.1.0",
+    "description": "A lossless, high performance data compression library in a single source file that implements zlib and Deflate standards, with PNG and ZIP archive support.",
+    "keywords": "miniz, zlib, deflate, compression, data compression, PNG, ZIP, archive, lossless, high performance",
+    "authors": [
+        {
+            "name": "Rich Geldreich",
+            "email": "richgel99@gmail.com"
+        }
+    ],
+    "license": "MIT",
+    "frameworks": "*",
+    "platforms": "*",
+    "exclude": ["examples/"]
+}

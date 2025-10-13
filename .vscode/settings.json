@@ -1,12 +1,17 @@
 {
     "cSpell.words": [
+        "drofs",
         "Dror",
-        "Gluska"
+        "Gluska",
+        "miniz",
+        "tdefl",
+        "tinfl"
     ],
     "cSpell.ignorePaths": [
         ".git",
         ".vscode",
         ".vscode-insiders",
-        "test_data"
+        "test_data",
+        "**/library.json"
     ]
 }
