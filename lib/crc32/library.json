@@ -1,0 +1,17 @@
+{
+    "$schema": "https://raw.githubusercontent.com/platformio/platformio-core/develop/platformio/assets/schema/library.json",
+    "name": "CRC32",
+    "version": "0.0.1",
+    "description": "A simple CRC32 calculation library.",
+    "keywords": "crc32, checksum",
+    "authors": [
+        {
+            "name": "Christopher Baker",
+            "email": "info@christopherbaker.net",
+            "url": "https://christopherbaker.net"
+        }
+    ],
+    "license": "MIT",
+    "frameworks": "*",
+    "platforms": "*"
+}
