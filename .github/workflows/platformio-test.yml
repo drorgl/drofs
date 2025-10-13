@@ -33,6 +33,9 @@ jobs:
       - name: Install PlatformIO Core
         run: pip install --upgrade platformio
 
+      - name: Run PlatformIO Build (ESP32-S3)
+        run: pio test -e esp32s3  --without-uploading --without-testing
+
       - name: Run PlatformIO Test (Linux Native)
         run: pio test -e linux_x64 --junit-output-path test-results.xml
 
