@@ -2,5 +2,11 @@
     "cSpell.words": [
         "Dror",
         "Gluska"
+    ],
+    "cSpell.ignorePaths": [
+        ".git",
+        ".vscode",
+        ".vscode-insiders",
+        "test_data"
     ]
 }
