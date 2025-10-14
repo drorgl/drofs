@@ -1,3 +1,7 @@
 .pio
 test-results.xml
 *.pyc
+test/test_drofs/test_compressed.img
+test/test_drofs/test_uncompressed.img
+test/test_drofs/uint32_sequence.bin
+test/test_drofs/uint32_sequence.zlib
