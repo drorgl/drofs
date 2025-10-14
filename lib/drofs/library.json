@@ -1,0 +1,13 @@
+{
+  "name": "drofs",
+  "version": "0.0.1",
+  "keywords": "Dror Read-Only Filesystem",
+  "authors": {
+    "name": "Dror Gluska",
+    "email": "drorgl@yahoo.com",
+    "url": "http://drorgluska.com"
+  },
+  "license": "MIT",
+  "frameworks": "*",
+  "platforms": "*"
+}
