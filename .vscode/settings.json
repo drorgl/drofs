@@ -1,17 +1,50 @@
 {
     "cSpell.words": [
+        "BADHD",
+        "binascii",
+        "binheader",
+        "binpath",
+        "constantname",
+        "cppcheck",
+        "crofs",
+        "dorny",
         "drofs",
         "Dror",
+        "espidf",
+        "freenove",
+        "Geldreich",
         "Gluska",
+        "ifndef",
+        "imagepath",
+        "Isort",
+        "localtime",
+        "malloc",
         "miniz",
+        "misra",
+        "opos",
+        "pydocstyle",
+        "Pyflakes",
+        "pytest",
+        "pyupgrade",
+        "sampl",
+        "sourcepath",
+        "stddef",
+        "stdint",
+        "stdlib",
         "tdefl",
-        "tinfl"
+        "threadsafety",
+        "tinfl",
+        "wroom"
     ],
     "cSpell.ignorePaths": [
         ".git",
         ".vscode",
         ".vscode-insiders",
         "test_data",
-        "**/library.json"
+        "**/library.json",
+        "pytest.ini"
+    ],
+    "python.analysis.extraPaths":[
+        "lib/drofs/tool"
     ]
 }

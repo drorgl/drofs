@@ -1,0 +1,41 @@
+[tool.ruff]
+line-length = 160
+target-version = "py38"
+src = ["lib/drofs/tool", "python_test", "scripts"]
+include = [ "lib/drofs/tool/**/*.py", "python_test/**/*.py", "scripts/**/*.py"]
+select = [
+    "E",  # Error
+    "W",  # Warning
+    "F",  # Pyflakes
+    "I",  # Isort
+    "N",  # Naming conventions
+    "D",  # pydocstyle
+    "UP", # pyupgrade
+    "B",  # flake8-bugbear
+    "A",  # flake8-builtins
+    "C4", # flake8-comprehensions
+    "SIM",# flake8-simplify
+]
+ignore = [
+    "D100", # Missing docstring in public module
+    "D104", # Missing docstring in public package
+    "D105", # Missing docstring in magic method
+    "D107", # Missing docstring in public init
+    "D103", # Missing docstring in public function
+    "D205", # 1 blank line required between summary line and description
+    "D212", # Multi-line docstring summary should start at the first line
+    "D202", # No blank lines allowed after function docstring
+    "D101", # Missing docstring in public class
+    "D102", # Missing docstring in public method
+
+]
+
+builtins = ["Import", "Export", "SConscript", "Environment"]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"] # Ignore unused imports in __init__.py
+
+[tool.ruff.pydocstyle]
+convention = "google"
+
+
