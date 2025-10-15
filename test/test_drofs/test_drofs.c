@@ -117,7 +117,7 @@ void when_converting_timestamp_to_string_return_date(){
 
     char timestamp_buffer[26];
     format_timestamp(timestamp, timestamp_buffer, sizeof(timestamp_buffer));
-    TEST_ASSERT_EQUAL_STRING("2025-09-30 20:41:30", timestamp_buffer);
+    TEST_ASSERT_EQUAL_STRING("2025-09-30 17:41:30", timestamp_buffer);
 }
 
 

@@ -9,7 +9,7 @@ void format_timestamp(uint32_t timestamp, char *buffer, size_t buffer_size) {
 
     // Convert the timestamp to a struct tm
     time_t t = (time_t)timestamp; 
-    tm_info = localtime(&t);
+    tm_info = gmtime(&t);
 
     // Format the time as a string
     strftime(buffer, buffer_size, "%Y-%m-%d %H:%M:%S", tm_info);
