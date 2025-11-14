@@ -52,7 +52,10 @@ jobs:
       
       - name: Coverage
         run: |
-          gcovr --add-tracefile .pio/tests/*.json --exclude test --exclude .pio/.* --xml-pretty -o .reports/coverage.xml --root .
+          gcovr --add-tracefile .pio/tests/*.json --exclude test --exclude .pio/.* --xml-pretty -o .reports/coverage.xml --markdown .reports/coverage.md --root .
+          echo "## 📊 Code Coverage Report" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          cat .reports/coverage.md >> $GITHUB_STEP_SUMMARY
         
       # - name: Upload Coverage Report to Codecov
       #   uses: codecov/codecov-action@v4
@@ -78,13 +81,13 @@ jobs:
       #     path: .reports/coverage.xml
       #     minimum_coverage: 75
 
-      - name: Produce the coverage report
-        uses: insightsengineering/coverage-action@v3
-        with:
-          path: .reports/coverage.xml
-          publish: false
-          coverage-summary-title: "Code Coverage Summary"
-          uncovered-statements-increase-failure: false
-          new-uncovered-statements-failure: false
-          coverage-rate-reduction-failure: true
+      # - name: Produce the coverage report
+      #   uses: insightsengineering/coverage-action@v3
+      #   with:
+      #     path: .reports/coverage.xml
+      #     publish: false
+      #     coverage-summary-title: "Code Coverage Summary"
+      #     uncovered-statements-increase-failure: false
+      #     new-uncovered-statements-failure: false
+      #     coverage-rate-reduction-failure: true
 
