@@ -53,9 +53,21 @@ jobs:
           mkdir -p .reports
           gcovr --add-tracefile .pio/tests/*.json --exclude test --exclude .pio/.* --xml-pretty -o .reports/coverage.xml --root .
         
-      - name: Upload Coverage Report to Codecov
-        uses: codecov/codecov-action@v4
+      # - name: Upload Coverage Report to Codecov
+      #   uses: codecov/codecov-action@v4
+      #   with:
+      #     files: .reports/coverage.xml  # Use the XML file generated above
+      #     fail_ci_if_error: true       # Fail the build if Codecov fails
+      #     verbose: true
+      - name: Code Coverage Report
+        uses: irongut/CodeCoverageSummary@v1.3.0
         with:
-          files: .reports/coverage.xml  # Use the XML file generated above
-          fail_ci_if_error: true       # Fail the build if Codecov fails
-          verbose: true
+          filename: .reports/coverage.xml
+          badge: true
+          # fail_below_min: true
+          format: markdown
+          hide_branch_rate: false
+          # hide_complexity: true
+          indicators: true
+          output: both
+          # thresholds: '60 80'
