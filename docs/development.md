@@ -59,3 +59,8 @@ pytest
 ```bash
 ruff check .
 ```
+
+# Coverage
+```bash
+gcovr --add-tracefile .pio/tests/*.json --exclude test --exclude .pio/.* --html-details .reports/coverage.html --root .
+```

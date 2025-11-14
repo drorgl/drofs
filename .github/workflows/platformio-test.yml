@@ -37,7 +37,7 @@ jobs:
         run: pio test -e esp32s3  --without-uploading --without-testing
 
       - name: Run PlatformIO Test (Linux Native)
-        run: pio test -e linux_x64 --junit-output-path test-results.xml
+        run: pio test -e native --junit-output-path test-results.xml
 
       - name: Test Report
         uses: dorny/test-reporter@v2
@@ -46,3 +46,16 @@ jobs:
           name: JEST Tests            # Name of the check run which will be created
           path: test-results.xml    # Path to test results
           reporter: jest-junit        # Format of test results
+      
+      - name: Coverage
+        run: |
+          pio run -t gcovr
+          mkdir -p .reports
+          gcovr --add-tracefile .pio/tests/*.json --exclude test --exclude .pio/.* --xml-pretty -o .reports/coverage.xml --root .
+        
+      - name: Upload Coverage Report to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          files: .reports/coverage.xml  # Use the XML file generated above
+          fail_ci_if_error: true       # Fail the build if Codecov fails
+          verbose: true

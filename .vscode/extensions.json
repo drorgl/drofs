@@ -1,7 +1,12 @@
 {
+    // See http://go.microsoft.com/fwlink/?LinkId=827846
+    // for the documentation about the extensions.json format
     "recommendations": [
         "ms-python.vscode-python-envs",
-        "streetsidesoftware.code-spell-checker",
-        "platformio.platformio-ide"
+        "platformio.platformio-ide",
+        "streetsidesoftware.code-spell-checker"
+    ],
+    "unwantedRecommendations": [
+        "ms-vscode.cpptools-extension-pack"
     ]
 }

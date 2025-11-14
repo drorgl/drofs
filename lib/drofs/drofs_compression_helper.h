@@ -12,6 +12,11 @@
 #include <string.h>
 #include <stdio.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 /**
  * @brief Opaque structure representing a decompression context.
  *
@@ -65,3 +70,7 @@ tinfl_status drofs_decompress_chunk(
     drofs_decompression_context_t *ctx,
     uint8_t *output_buffer,
     size_t *output_buffer_len);
+
+#ifdef __cplusplus
+}
+#endif

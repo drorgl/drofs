@@ -7,6 +7,11 @@
 
 #include <crc32.h>
 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * @brief Enumeration for the type of a DROFS entry.
  */
@@ -108,3 +113,7 @@ bool drofs_verify_entry(struct drofs_entry_t * entry);
  * @return True if the entry was found, false otherwise.
  */
 bool drofs_get_entry(const uint8_t * data, size_t data_length, const char * path,struct drofs_entry_t * entry );
+
+#ifdef __cplusplus
+}
+#endif
