@@ -15,11 +15,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
-
       - name: Cache PlatformIO Dependencies
         uses: actions/cache@v4
         with:
@@ -27,11 +22,19 @@ jobs:
             ~/.cache/pip
             ~/.platformio/.cache
           key: ${{ runner.os }}-pio-${{ hashFiles('platformio.ini') }}
-          restore-keys: |
-            ${{ runner.os }}-pio-
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
 
       - name: Install PlatformIO Core
         run: pip install --upgrade platformio
+      
+      - name: Coverage
+        run: |
+          pip install gcovr
+          mkdir -p .reports
 
       - name: Run PlatformIO Build (ESP32-S3)
         run: pio test -e esp32s3  --without-uploading --without-testing
@@ -49,8 +52,6 @@ jobs:
       
       - name: Coverage
         run: |
-          pip install gcovr
-          mkdir -p .reports
           gcovr --add-tracefile .pio/tests/*.json --exclude test --exclude .pio/.* --xml-pretty -o .reports/coverage.xml --root .
         
       # - name: Upload Coverage Report to Codecov
