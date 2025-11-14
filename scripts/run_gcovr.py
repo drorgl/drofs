@@ -60,9 +60,7 @@ def runNativeChecks(source, target, env):
         "--json",  # <--- CHANGED FROM --json-summary-pretty
         os.path.join(".pio/tests/", test_name + ".json"),
         "--root",
-        ".",
-        "--exclude-directories",
-        ".*pio/libdeps/.*",
+        "."
     ]
 
     command = " ".join(cppcheckargs)
