@@ -73,7 +73,7 @@ jobs:
       #     output: both
       #     # thresholds: '60 80'
       - name: Coverage Report
-        - uses: 5monkeys/cobertura-action@master
-          with:
-            path: .reports/coverage.xml
-            minimum_coverage: 75
+        uses: 5monkeys/cobertura-action@master
+        with:
+          path: .reports/coverage.xml
+          minimum_coverage: 75
