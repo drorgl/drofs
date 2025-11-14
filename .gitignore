@@ -6,6 +6,5 @@ test/test_drofs/test_uncompressed.img
 test/test_drofs/uint32_sequence.bin
 test/test_drofs/uint32_sequence.zlib
 .reports
-
 .vscode/c_cpp_properties.json
 .vscode/launch.json
