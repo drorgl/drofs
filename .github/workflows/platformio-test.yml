@@ -31,7 +31,7 @@ jobs:
       - name: Install PlatformIO Core
         run: pip install --upgrade platformio
       
-      - name: Coverage
+      - name: Install gcovr
         run: |
           pip install gcovr
           mkdir -p .reports
