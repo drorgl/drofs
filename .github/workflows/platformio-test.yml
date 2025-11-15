@@ -35,6 +35,9 @@ jobs:
         run: |
           pip install gcovr
           mkdir -p .reports
+      
+      - name: Install Valgrind
+        run: sudo apt-get update && sudo apt-get install -y valgrind
 
       - name: Run PlatformIO Build (ESP32-S3)
         run: pio test -e esp32s3  --without-uploading --without-testing
@@ -56,6 +59,37 @@ jobs:
           echo "## 📊 Code Coverage Report" >> $GITHUB_STEP_SUMMARY
           echo "---" >> $GITHUB_STEP_SUMMARY
           cat .reports/coverage.md >> $GITHUB_STEP_SUMMARY
+
+      - name: Sanitizers
+        run: |
+          pio test -e native_sanitizers
+          SUMMARY_FILE=$GITHUB_STEP_SUMMARY
+          LOG_DIR=".pio/tests"
+          
+          echo "## 🛡️ ASan/UBSan Memory Check Results" >> $SUMMARY_FILE
+          echo "---" >> $SUMMARY_FILE
+          
+          if [ -z "$(ls -A $LOG_DIR/asan_ubsan_*.log 2>/dev/null)" ]; then
+              echo "> **No ASan/UBSan log files found.**" >> $SUMMARY_FILE
+              exit 0
+          fi
+
+          for log_file in $LOG_DIR/asan_ubsan_*.log; do
+              TEST_NAME=$(basename $log_file | sed 's/asan_ubsan_\(.*\)\.log/\1/')
+              
+              if grep -q "==[0-9]*==" "$log_file"; then
+                  echo "<details><summary>❌ **$TEST_NAME FAILED (Memory Errors Detected)**</summary>" >> $SUMMARY_FILE
+                  echo "" >> $SUMMARY_FILE
+                  echo "\`\`\`text" >> $SUMMARY_FILE
+                  cat "$log_file" >> $SUMMARY_FILE
+                  echo "\`\`\`" >> $SUMMARY_FILE
+                  echo "</details>" >> $SUMMARY_FILE
+              else
+                  echo "* ✅ **$TEST_NAME** - No memory errors reported." >> $SUMMARY_FILE
+              fi
+              echo "---" >> $SUMMARY_FILE
+          done
+
         
       # - name: Upload Coverage Report to Codecov
       #   uses: codecov/codecov-action@v4
