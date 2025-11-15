@@ -89,6 +89,7 @@ jobs:
                   
                   echo "" >> $SUMMARY_FILE # Mandatory blank line
                   echo "</details>" >> $SUMMARY_FILE
+                  echo "" >> $SUMMARY_FILE
               else
                   echo "* ✅ **$TEST_NAME** - No memory or undefined behavior errors reported." >> $SUMMARY_FILE
               fi
@@ -138,6 +139,7 @@ jobs:
                   
                   echo "" >> $SUMMARY_FILE
                   echo "</details>" >> $SUMMARY_FILE
+                  echo "" >> $SUMMARY_FILE
                   
               else
                   # SUCCESS CASE: Contains the success message
