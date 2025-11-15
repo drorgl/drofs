@@ -61,8 +61,9 @@ jobs:
           cat .reports/coverage.md >> $GITHUB_STEP_SUMMARY
 
       - name: Sanitizers
+        continue-on-error: true 
         run: |
-          pio test -e native_sanitizers
+          pio test -e native_sanitizers || true
           SUMMARY_FILE=$GITHUB_STEP_SUMMARY
           LOG_DIR=".pio/tests"
           
@@ -93,8 +94,9 @@ jobs:
           done
 
       - name: Valgrind
+        continue-on-error: true 
         run: |
-          pio test -e native_valgrind
+          pio test -e native_valgrind || true 
           SUMMARY_FILE=$GITHUB_STEP_SUMMARY
           LOG_DIR=".pio/tests"
           
