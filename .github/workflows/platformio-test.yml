@@ -77,7 +77,8 @@ jobs:
           for log_file in $LOG_DIR/asan_ubsan_*.log; do
               TEST_NAME=$(basename $log_file | sed 's/asan_ubsan_\(.*\)\.log/\1/')
               
-              if grep -q "==[0-9]*==" "$log_file"; then
+              LINE_COUNT=$(wc -l < "$log_file")
+              if [ "$LINE_COUNT" -gt 0 ]; then
                   echo "<details><summary>❌ **$TEST_NAME FAILED (Memory Errors Detected)**</summary>" >> $SUMMARY_FILE
                   echo "" >> $SUMMARY_FILE
                   echo "\`\`\`text" >> $SUMMARY_FILE
