@@ -232,6 +232,10 @@ void when_reading_file2_txt_verify_contents_using_original_crc32(){
 
 }
 
+void dummy(){
+    char * x = malloc(10);
+}
+
 
 int main(void) {
     UNITY_BEGIN(); // Start Unity test framework
@@ -248,6 +252,7 @@ int main(void) {
     RUN_TEST(when_uncompressing_data_crc32_should_be_equal_to_uncompressed_crc32);
     RUN_TEST(when_uncompressing_data_in_chunks_validate_output);
     RUN_TEST(when_reading_file2_txt_verify_contents_using_original_crc32);
+    RUN_TEST(dummy);
     return UNITY_END(); // End Unity test framework
 }
 

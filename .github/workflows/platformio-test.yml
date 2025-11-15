@@ -79,7 +79,8 @@ jobs:
               
               LINE_COUNT=$(wc -l < "$log_file")
               if [ "$LINE_COUNT" -gt 0 ]; then
-                  echo "<details><summary>❌ **$TEST_NAME FAILED (Memory Errors Detected)**</summary>" >> $SUMMARY_FILE
+                  echo "❌ **$TEST_NAME FAILED (Memory Errors Detected)**" >> $SUMMARY_FILE
+                  echo "<details><summary>details</summary>" >> $SUMMARY_FILE
                   echo "" >> $SUMMARY_FILE
                   echo "\`\`\`text" >> $SUMMARY_FILE
                   cat "$log_file" >> $SUMMARY_FILE
@@ -90,6 +91,54 @@ jobs:
               fi
               echo "---" >> $SUMMARY_FILE
           done
+
+      - name: Valgrind
+        run: |
+          pio test -e native_valgrind
+          SUMMARY_FILE=$GITHUB_STEP_SUMMARY
+          LOG_DIR=".pio/tests"
+          
+          echo "## 🛡️ Valgrind Memory Check Results" >> $SUMMARY_FILE
+          echo "---" >> $SUMMARY_FILE
+          
+          if [ -z "$(ls -A $LOG_DIR/memory_*.txt 2>/dev/null)" ]; then
+              echo "> **No Valgrind log files found.**" >> $SUMMARY_FILE
+              exit 0
+          fi
+
+          for log_file in $LOG_DIR/memory_*.txt; do
+              # Extract the test name from the filename
+              TEST_NAME=$(basename $log_file | sed 's/memory_\(.*\)\.txt/\1/')
+              
+              # Check if the log file contains the phrase "ERROR SUMMARY: 0 errors"
+              # If the file DOES NOT contain this phrase, we assume failure (due to --error-exitcode=1)
+              if ! grep -q "ERROR SUMMARY: 0 errors from 0 contexts" "$log_file"; then
+                  
+                  # FAILURE CASE: Contains errors (e.g., ERROR SUMMARY: 1 errors) or process crashed.
+                  
+                  # Find the actual error count from the file for the summary line
+                  ERROR_COUNT=$(grep "ERROR SUMMARY:" "$log_file" | awk '{print $3}')
+                  # Fallback text if the summary line isn't clear
+                  ERROR_TEXT="${ERROR_COUNT:-An unknown number of} errors found" 
+
+                  echo "<details open><summary>❌ <b>$TEST_NAME FAILED</b> ($ERROR_TEXT)</summary>" >> $SUMMARY_FILE
+                  echo "" >> $SUMMARY_FILE
+                  
+                  # Insert a code block for the full log
+                  echo "\`\`\`text" >> $SUMMARY_FILE
+                  cat "$log_file" >> $SUMMARY_FILE
+                  echo "\`\`\`" >> $SUMMARY_FILE
+                  
+                  echo "" >> $SUMMARY_FILE
+                  echo "</details>" >> $SUMMARY_FILE
+                  
+              else
+                  # SUCCESS CASE: Contains the success message "ERROR SUMMARY: 0 errors"
+                  echo "* ✅ **$TEST_NAME** - All memory blocks were freed, 0 errors reported." >> $SUMMARY_FILE
+              fi
+              echo "---" >> $SUMMARY_FILE
+          done
+          
 
         
       # - name: Upload Coverage Report to Codecov

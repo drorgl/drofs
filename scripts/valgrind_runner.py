@@ -51,7 +51,7 @@ def run_test_with_valgrind():
         # Set exit code to 1 if any errors are found (ensures test failure)
         "--error-exitcode=1",
         # Generate XML for later automated parsing (e.g., in CI)
-        # "--xml=yes",
+        "--xml=yes",
         f"--xml-file={xml_report_path}",
         # Target executable and arguments (if any)
         test_executable,
