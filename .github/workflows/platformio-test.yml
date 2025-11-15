@@ -52,6 +52,7 @@ jobs:
       
       - name: Coverage
         run: |
+          ls -l .pio/tests/*.json
           gcovr --add-tracefile .pio/tests/*.json --exclude test --exclude .pio/.* --xml-pretty -o .reports/coverage.xml --markdown .reports/coverage.md --root .
           echo "## 📊 Code Coverage Report" >> $GITHUB_STEP_SUMMARY
           echo "---" >> $GITHUB_STEP_SUMMARY
